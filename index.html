@@ -22,12 +22,14 @@ body{
   padding:24px 16px 40px;
   overflow-x:hidden;
 }
+
 .heart{position:fixed;pointer-events:none;z-index:0;opacity:0;animation:fall linear infinite}
 @keyframes fall{
   0%{transform:translateY(-40px) rotate(-15deg);opacity:.8}
   60%{opacity:.6}
   100%{transform:translateY(110vh) rotate(25deg);opacity:0}
 }
+
 .title-area{text-align:center;margin-bottom:24px;position:relative;z-index:2}
 .title-area h1{
   font-family:'Playfair Display',serif;
@@ -36,7 +38,10 @@ body{
   text-shadow:0 0 40px #FF9B4244;
 }
 .title-area p{color:#c8a07888;font-size:12px;letter-spacing:.22em;margin-top:7px;font-style:italic}
+
 .player-wrap{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+
+/* Turntable */
 .turntable{
   width:340px;height:340px;
   background:radial-gradient(circle at 38% 33%, #2e0e1c, #1a0510);
@@ -50,16 +55,19 @@ body{
   background:linear-gradient(90deg,#5a1a08,#8a2e10,#4e1206,#7a2810,#521408);
   border-radius:0 0 16px 16px;opacity:.8;
 }
+
 .felt{
   width:268px;height:268px;border-radius:50%;
   background:radial-gradient(circle at 45% 40%, #1e0810, #120408);
   position:absolute;
   box-shadow:0 2px 16px #00000066, inset 0 1px 4px #ffffff05;
 }
+
 .vinyl{width:252px;height:252px;border-radius:50%;position:absolute}
 .vinyl svg{width:100%;height:100%;border-radius:50%}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .vinyl.playing{animation:spin 2.2s linear infinite}
+
 .tonearm-wrap{
   position:absolute;top:12px;right:22px;
   width:120px;height:190px;
@@ -86,12 +94,15 @@ body{
   border-radius:3px 3px 8px 8px;border:1px solid #F53B4A55;
   box-shadow:0 0 8px #F53B4A33;
 }
+
 .hint{
   position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
   color:#c8807055;font-size:10px;letter-spacing:.15em;font-style:italic;
   white-space:nowrap;transition:opacity .5s;pointer-events:none;z-index:5;
 }
 .hint.hidden{opacity:0}
+
+/* Info panel */
 .info-panel{
   width:340px;margin-top:14px;
   background:#1e0812cc;
@@ -105,12 +116,14 @@ body{
 .dot.off{background:#4a1828;box-shadow:none}
 .song-title{font-family:'Playfair Display',serif;font-size:15px;color:#F3F0E7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .song-artist{font-size:11px;color:#c89070;letter-spacing:.15em;margin-top:2px}
+
 .timeline-wrap{position:relative;margin-bottom:10px}
 .timeline-bg{width:100%;height:3px;background:#3a0e1a;border-radius:2px;cursor:pointer;position:relative}
 .timeline-fill{height:100%;background:linear-gradient(90deg,#AC151C,#F53B4A,#FF9B42);border-radius:2px;width:0%;pointer-events:none}
 .timeline-thumb{width:11px;height:11px;border-radius:50%;background:#FF9B42;border:2px solid #23022E;position:absolute;top:50%;transform:translate(-50%,-50%);left:0%;pointer-events:none;box-shadow:0 0 6px #FF9B4288}
 .time-row{display:flex;justify-content:space-between;margin-top:6px}
 .time-txt{font-size:11px;color:#7a4838;letter-spacing:.1em}
+
 .controls{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:8px}
 .ctrl-btn{background:none;border:none;cursor:pointer;color:#7a4040;font-size:22px;padding:6px;border-radius:50%;transition:color .2s,transform .15s;line-height:1}
 .ctrl-btn:hover{color:#F3F0E7;transform:scale(1.15)}
@@ -124,6 +137,8 @@ body{
   color:#F3F0E7;
 }
 .ctrl-btn.play-btn:hover{background:#3e1028;border-color:#F53B4A88;box-shadow:0 0 20px #F53B4A33}
+
+/* Song list */
 .song-list{width:340px;margin-top:10px;display:flex;flex-direction:column;gap:6px}
 .song-item{
   display:flex;align-items:center;gap:10px;padding:8px 12px;
@@ -155,6 +170,7 @@ body{
 <div class="player-wrap">
   <div class="turntable" id="turntable">
     <div class="felt"></div>
+
     <div class="vinyl" id="vinyl">
       <svg viewBox="0 0 252 252" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -169,6 +185,7 @@ body{
           </radialGradient>
         </defs>
         <circle cx="126" cy="126" r="126" fill="url(#vg)"/>
+        <!-- Grooves with warm tint -->
         <circle cx="126" cy="126" r="118" fill="none" stroke="#3a1020" stroke-width=".8"/>
         <circle cx="126" cy="126" r="110" fill="none" stroke="#2e0c18" stroke-width=".6"/>
         <circle cx="126" cy="126" r="102" fill="none" stroke="#3a1020" stroke-width=".8"/>
@@ -176,20 +193,27 @@ body{
         <circle cx="126" cy="126" r="86"  fill="none" stroke="#3a1020" stroke-width=".8"/>
         <circle cx="126" cy="126" r="78"  fill="none" stroke="#2e0c18" stroke-width=".6"/>
         <circle cx="126" cy="126" r="70"  fill="none" stroke="#3a1020" stroke-width=".8"/>
-        <circle cx="126" cy="126" r="50"  fill="url(#lg)"/>
-        <circle cx="126" cy="126" r="46"  fill="none" stroke="#AC156A" stroke-width=".9" opacity=".5"/>
-        <circle cx="126" cy="126" r="38"  fill="#1e0814"/>
+        <!-- Label -->
+        <circle cx="126" cy="126" r="50" fill="url(#lg)"/>
+        <circle cx="126" cy="126" r="46" fill="none" stroke="#AC156A" stroke-width=".9" opacity=".5"/>
+        <circle cx="126" cy="126" r="38" fill="#1e0814"/>
+        <!-- Hearts on label -->
+        <!-- big center heart -->
         <path d="M126,134 C126,134 113,124 113,116 C113,111 117.5,108.5 121.5,110 C123.5,110.8 126,113.5 126,113.5 C126,113.5 128.5,110.8 130.5,110 C134.5,108.5 139,111 139,116 C139,124 126,134 126,134 Z" fill="#F53B4A" opacity=".85"/>
+        <!-- small hearts -->
         <path d="M104,113 C104,113 99,109 99,106 C99,103.5 100.8,102 103,102.5 C103.7,102.7 104,103.3 104,103.3 C104,103.3 104.3,102.7 105,102.5 C107.2,102 109,103.5 109,106 C109,109 104,113 104,113 Z" fill="#AC156A" opacity=".75"/>
         <path d="M148,113 C148,113 143,109 143,106 C143,103.5 144.8,102 147,102.5 C147.7,102.7 148,103.3 148,103.3 C148,103.3 148.3,102.7 149,102.5 C151.2,102 153,103.5 153,106 C153,109 148,113 148,113 Z" fill="#FF9B42" opacity=".7"/>
         <path d="M111,145 C111,145 107,142 107,139.5 C107,137.5 108.5,136.2 110.5,136.7 C111,136.9 111.3,137.4 111.3,137.4 C111.3,137.4 111.6,136.9 112.1,136.7 C114.1,136.2 115.6,137.5 115.6,139.5 C115.6,142 111,145 111,145 Z" fill="#AC151C" opacity=".7"/>
         <path d="M141,145 C141,145 137,142 137,139.5 C137,137.5 138.5,136.2 140.5,136.7 C141,136.9 141.3,137.4 141.3,137.4 C141.3,137.4 141.6,136.9 142.1,136.7 C144.1,136.2 145.6,137.5 145.6,139.5 C145.6,142 141,145 141,145 Z" fill="#F53B4A" opacity=".65"/>
+        <!-- Label text -->
         <text x="126" y="116" text-anchor="middle" font-family="'Playfair Display',serif" font-size="5.5" fill="#F3F0E7" letter-spacing="1.2" opacity=".8">HeartIt</text>
-        <text x="126" y="124" text-anchor="middle" font-family="'Playfair Display',serif" font-size="4.5" fill="#F3F0E7" letter-spacing=".8" opacity=".7">RECORDS</text>
+        <text x="126" y="124" text-anchor="middle" font-family="'Playfair Display',serif" font-size="4.5" fill="#AC156A" letter-spacing=".8" opacity=".7">RECORDS</text>
+        <!-- Spindle -->
         <circle cx="126" cy="126" r="4.5" fill="#c86838"/>
-        <circle cx="126" cy="126" r="2"   fill="#23022E"/>
+        <circle cx="126" cy="126" r="2" fill="#23022E"/>
       </svg>
     </div>
+
     <div class="tonearm-wrap" id="tonearm">
       <div class="tonearm-base"></div>
       <div class="tonearm-arm"><div class="tonearm-head"></div></div>
@@ -225,17 +249,7 @@ body{
   <div class="song-list" id="song-list"></div>
 </div>
 
-<!--
-  The hidden iframe uses youtube-nocookie.com with enablejsapi=1.
-  We control it via postMessage — no YT.Player object needed,
-  so it works in Electron / WebView / file:// with no origin restrictions.
--->
-<iframe
-  id="yt-frame"
-  style="position:fixed;left:-9999px;top:0;width:2px;height:2px;border:0"
-  allow="autoplay"
-  allowfullscreen
-></iframe>
+<div id="yt-player" style="position:fixed;left:-9999px;top:0;width:1px;height:1px;"></div>
 
 <script>
 /* ── Falling hearts ── */
@@ -255,171 +269,123 @@ body{
 
 /* ── Songs ── */
 const SONGS = [
+  { title:"Sweater Weather",  artist:"The Neighbourhood", videoId:"GCdwKhTtNNw", duration:235 },
+  { title:"Lovin' You",       artist:"Minnie Riperton",   videoId:"9I3UTG1dSTc", duration:214 },
   { title:"Oxygen",              artist:"Beach Bunny", videoId:"6-jZBtFcbtI", duration:186 },
   { title:"Francis Forever",     artist:"Mitski",      videoId:"mHKTdlUyyko", duration:149 },
   { title:"Moon Girl",           artist:"Ha Vay",      videoId:"Y6KQVbOhN04", duration:217 },
-  { title:"Daughter (stripped)", artist:"L Devine",    videoId:"V06SbMGJtK0", duration:214 },
-  { title:"Love Story",          artist:"Reinaeiry",   videoId:"vOz3W8TGSBE", duration:240 },
   // { title:"Song Title", artist:"Artist", videoId:"YOUTUBE_ID", duration:000 },
 ];
 
-/* ── State ── */
-let currentIdx=0, isPlaying=false, songLoaded=false, ticker=null;
-let iframeReady=false, pendingAutoplay=false;
-let currentTime=0, knownDuration=0;
-
+let player=null,ytReady=false,currentIdx=0,isPlaying=false,songLoaded=false,ticker=null;
 function fmt(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+":"+(s%60<10?"0":"")+s%60}
 
-/* ── iframe reference ── */
-const frame = document.getElementById('yt-frame');
+const tag=document.createElement('script');
+tag.src="https://www.youtube.com/iframe_api";
+document.head.appendChild(tag);
 
-/*
-  postMessage command helper.
-  YouTube's embed accepts these commands when enablejsapi=1:
-  playVideo, pauseVideo, stopVideo, seekTo, mute, unMute
-*/
-function ytCmd(func, args){
-  if(!frame || !frame.contentWindow) return;
-  frame.contentWindow.postMessage(
-    JSON.stringify({ event:'command', func, args: args || [] }),
-    '*'
-  );
-}
+window.onYouTubeIframeAPIReady=function(){
+  player=new YT.Player('yt-player',{
+    width:1,height:1,videoId:'',
+    playerVars:{autoplay:0,controls:0,disablekb:1,fs:0,modestbranding:1,rel:0},
+    events:{
+      onReady:()=>{ytReady=true;},
+      onStateChange:e=>{
+        if(e.data===YT.PlayerState.PLAYING)     setPlaying(true);
+        else if(e.data===YT.PlayerState.PAUSED)  setPlaying(false);
+        else if(e.data===YT.PlayerState.ENDED){  stopTicker();nextSong(); }
+      },
+      onError:e=>console.warn('YT error',e.data)
+    }
+  });
+};
 
-/* Listen for state messages back from the YouTube iframe */
-window.addEventListener('message', ev => {
-  let d;
-  try { d = JSON.parse(ev.data); } catch(e){ return; }
-
-  if(d.event === 'onReady'){
-    iframeReady = true;
-    if(pendingAutoplay){ ytCmd('playVideo'); pendingAutoplay=false; }
-  }
-
-  if(d.event === 'onStateChange'){
-    // 1=playing  2=paused  0=ended  3=buffering  5=video cued
-    const s = typeof d.info === 'object' ? d.info.playerState : d.info;
-    if(s === 1)      setPlaying(true);
-    else if(s === 2) setPlaying(false);
-    else if(s === 0){ stopTicker(); nextSong(); }
-  }
-
-  // Duration / time info arrives here
-  if(d.event === 'infoDelivery' && d.info){
-    if(d.info.currentTime != null) currentTime    = d.info.currentTime;
-    if(d.info.duration    != null) knownDuration  = d.info.duration;
-  }
-});
-
-/* ── Ticker: smooth local estimate + postMessage poll ── */
 function startTicker(){
   stopTicker();
-  ticker = setInterval(()=>{
-    if(isPlaying) currentTime = Math.min(currentTime + 0.3, knownDuration || SONGS[currentIdx].duration);
-    const dur = knownDuration || SONGS[currentIdx].duration;
-    const pct = dur ? Math.min(currentTime/dur*100, 100) : 0;
-    document.getElementById('tl-fill').style.width  = pct+'%';
-    document.getElementById('tl-thumb').style.left  = pct+'%';
-    document.getElementById('t-cur').textContent    = fmt(currentTime);
-    document.getElementById('t-dur').textContent    = fmt(dur);
-  }, 300);
+  ticker=setInterval(()=>{
+    if(!player||!ytReady)return;
+    try{
+      const cur=player.getCurrentTime()||0;
+      const dur=player.getDuration()||SONGS[currentIdx].duration;
+      const pct=Math.min(cur/dur*100,100);
+      document.getElementById('tl-fill').style.width=pct+'%';
+      document.getElementById('tl-thumb').style.left=pct+'%';
+      document.getElementById('t-cur').textContent=fmt(cur);
+      document.getElementById('t-dur').textContent=fmt(dur);
+    }catch(e){}
+  },300);
 }
 function stopTicker(){if(ticker){clearInterval(ticker);ticker=null;}}
 
 function setPlaying(v){
-  isPlaying = v;
-  document.getElementById('play-btn').textContent = v ? '⏸' : '▶';
-  document.getElementById('dot').className = 'dot'+(v?'':' off');
-  document.getElementById('vinyl').classList.toggle('playing', v);
-  if(v || songLoaded){
+  isPlaying=v;
+  document.getElementById('play-btn').textContent=v?'⏸':'▶';
+  document.getElementById('dot').className='dot'+(v?'':' off');
+  document.getElementById('vinyl').classList.toggle('playing',v);
+  if(v||songLoaded){
     document.getElementById('tonearm').classList.add('on-record');
     document.getElementById('hint').classList.add('hidden');
   }
-  v ? startTicker() : stopTicker();
+  v?startTicker():stopTicker();
 }
 
-function loadSong(idx, autoplay){
-  currentIdx=idx; songLoaded=true;
-  iframeReady=false; currentTime=0; knownDuration=0;
-  pendingAutoplay = !!autoplay;
-
-  const sg = SONGS[idx];
-  document.getElementById('song-title').textContent  = sg.title;
-  document.getElementById('song-artist').textContent = sg.artist;
-  document.getElementById('t-dur').textContent       = fmt(sg.duration);
+function loadSong(idx,autoplay){
+  currentIdx=idx;songLoaded=true;
+  const sg=SONGS[idx];
+  document.getElementById('song-title').textContent=sg.title;
+  document.getElementById('song-artist').textContent=sg.artist;
+  document.getElementById('t-dur').textContent=fmt(sg.duration);
   document.getElementById('tonearm').classList.add('on-record');
   document.getElementById('hint').classList.add('hidden');
-  renderList(); stopTicker(); setPlaying(false);
-
-  /*
-    Key: set frame.src directly.
-    - youtube-nocookie.com avoids extra tracking cookies
-    - enablejsapi=1  → iframe will accept postMessage commands
-    - origin param is intentionally omitted so YouTube doesn't
-      reject requests from file:// or custom-protocol origins
-  */
-  frame.src = `https://www.youtube-nocookie.com/embed/${sg.videoId}`
-    + `?autoplay=${autoplay?1:0}`
-    + `&enablejsapi=1`
-    + `&controls=0`
-    + `&disablekb=1`
-    + `&fs=0`
-    + `&modestbranding=1`
-    + `&rel=0`
-    + `&playsinline=1`;
+  renderList();stopTicker();
+  if(ytReady&&player){autoplay?player.loadVideoById(sg.videoId):player.cueVideoById(sg.videoId);}
+  if(!autoplay)setPlaying(false);
 }
 
-function nextSong(){ loadSong((currentIdx+1) % SONGS.length, true); }
+function nextSong(){loadSong((currentIdx+1)%SONGS.length,true);}
 function prevSong(){
-  if(currentTime > 3){ currentTime=0; ytCmd('seekTo',[0,true]); return; }
-  loadSong((currentIdx-1+SONGS.length) % SONGS.length, isPlaying);
+  try{if(ytReady&&player&&player.getCurrentTime()>3){player.seekTo(0,true);return;}}catch(e){}
+  loadSong((currentIdx-1+SONGS.length)%SONGS.length,isPlaying);
 }
 
 function renderList(){
-  document.getElementById('song-list').innerHTML = SONGS.map((sg,i)=>`
+  document.getElementById('song-list').innerHTML=SONGS.map((sg,i)=>`
     <div class="song-item${i===currentIdx&&songLoaded?' active':''}" onclick="selectSong(${i})">
       <span class="song-num">${i===currentIdx&&isPlaying?'♥':i+1}</span>
       <div class="song-info"><div class="s-title">${sg.title}</div><div class="s-artist">${sg.artist}</div></div>
       <span class="s-dur">${fmt(sg.duration)}</span>
     </div>`).join('');
 }
-window.selectSong = idx => loadSong(idx, true);
+window.selectSong=idx=>loadSong(idx,true);
 renderList();
 
-/* ── Button controls ── */
-document.getElementById('play-btn').addEventListener('click', ()=>{
-  if(!songLoaded){ loadSong(0, true); return; }
-  if(isPlaying){
-    ytCmd('pauseVideo');
-  } else {
-    if(iframeReady) ytCmd('playVideo');
-    else pendingAutoplay = true;
-  }
+document.getElementById('play-btn').addEventListener('click',()=>{
+  if(!ytReady||!player){alert('YouTube lädt noch...');return;}
+  if(!songLoaded){loadSong(0,true);return;}
+  isPlaying?player.pauseVideo():player.playVideo();
 });
-document.getElementById('next-btn').addEventListener('click', nextSong);
-document.getElementById('prev-btn').addEventListener('click', prevSong);
-document.getElementById('tonearm').addEventListener('click', ()=>{
-  if(!songLoaded) loadSong(0, true);
+document.getElementById('next-btn').addEventListener('click',nextSong);
+document.getElementById('prev-btn').addEventListener('click',prevSong);
+document.getElementById('tonearm').addEventListener('click',()=>{
+  if(!songLoaded)loadSong(0,true);
   else document.getElementById('play-btn').click();
 });
 
-/* ── Scrubbing ── */
 let scrub=false;
 function doScrub(e){
-  const r   = document.getElementById('timeline').getBoundingClientRect();
-  const px  = e.touches ? e.touches[0].clientX : e.clientX;
-  const pct = Math.max(0, Math.min(1, (px-r.left)/r.width));
-  const dur = knownDuration || SONGS[currentIdx].duration;
-  currentTime = pct * dur;
-  ytCmd('seekTo', [currentTime, true]);
+  if(!ytReady||!player)return;
+  const r=document.getElementById('timeline').getBoundingClientRect();
+  const px=e.touches?e.touches[0].clientX:e.clientX;
+  const pct=Math.max(0,Math.min(1,(px-r.left)/r.width));
+  try{player.seekTo(pct*(player.getDuration()||SONGS[currentIdx].duration),true);}catch(ex){}
 }
-const tl = document.getElementById('timeline');
-tl.addEventListener('mousedown',  e=>{scrub=true; doScrub(e);});
-document.addEventListener('mousemove',  e=>{if(scrub) doScrub(e);});
-document.addEventListener('mouseup',    ()=>{scrub=false;});
-tl.addEventListener('touchstart', e=>{scrub=true; doScrub(e);},{passive:true});
-document.addEventListener('touchmove',  e=>{if(scrub) doScrub(e);},{passive:true});
-document.addEventListener('touchend',   ()=>{scrub=false;});
+const tl=document.getElementById('timeline');
+tl.addEventListener('mousedown',e=>{scrub=true;doScrub(e);});
+document.addEventListener('mousemove',e=>{if(scrub)doScrub(e);});
+document.addEventListener('mouseup',()=>{scrub=false;});
+tl.addEventListener('touchstart',e=>{scrub=true;doScrub(e);},{passive:true});
+document.addEventListener('touchmove',e=>{if(scrub)doScrub(e);},{passive:true});
+document.addEventListener('touchend',()=>{scrub=false;});
 </script>
 </body>
 </html>
